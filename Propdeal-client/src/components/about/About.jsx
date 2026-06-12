@@ -3,13 +3,10 @@ import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 import L from "leaflet";
 import axios from "axios";
-import Header from "../header/Header";
 import markerIcon from "leaflet/dist/images/marker-icon.png";
 import markerShadow from "leaflet/dist/images/marker-shadow.png";
 import { useNavigate } from "react-router-dom";
 
-import {Model } from 'react-modal';
-  
 let DefaultIcon = L.icon({
   iconUrl: markerIcon,
   shadowUrl: markerShadow,
@@ -24,8 +21,6 @@ const TABS = [
   { id: "price-details", label: "PRICE DETAILS" },
   { id: "prop-images", label: "PROPERTY IMAGES" },
 ];
-
-
 
 const PropertyForm = ({
   propertyFor,
@@ -45,7 +40,6 @@ const PropertyForm = ({
     e.preventDefault();
     setFormSubmitted(true);
     if (isFormValid()) {
-      // Handle form submission logic here
       console.log('Form submitted');
     }
   };
@@ -120,7 +114,6 @@ const PropertyForm = ({
           onClick={setBhkType}
           required
         />
-        
       </form>
       {formSubmitted && !isFormValid() && (
         <p className="text-red-500">Please fill out all required fields.</p>
@@ -129,14 +122,7 @@ const PropertyForm = ({
   );
 };
 
-
-const FormButtonGroup = ({
-  label,
-  options,
-  selectedOption,
-  onClick,
-  required,
-}) => (
+const FormButtonGroup = ({ label, options, selectedOption, onClick, required }) => (
   <div className="mb-4">
     <label className="block text-gray-700">{label}</label>
     {options.map((option) => (
@@ -155,33 +141,6 @@ const FormButtonGroup = ({
     ))}
   </div>
 );
-
-
-// const FormButtonGroup2 = ({ label, options, selectedOption, onClick ,required }) => (
-//   <div className="mt-4">
-//     {label && (
-//       <label className="font-Inter text-[#000000D9] font-medium text-[16px]">
-//         <span className="text-[#FF4D4F] ml-[2px]">*</span> {label}:
-//       </label>
-//     )}
-//     <div className="flex w-full flex-wrap ml-2">
-//       {options.map((option) => (
-//         <button
-//           key={option}
-//
-//           onClick={() => onClick(option)}
-//           className={`mr-4 h-[2.438rem] my-[10px] font-Inter font-normal text-[14px] w-auto px-[1.5rem] rounded-3xl border-[2px] ${
-//             selectedOption === option
-//               ? "bg-[#122B46] text-white"
-//               : "bg-white text-black"
-//           }`}
-//         >
-//           {option}
-//         </button>
-//       ))}
-//     </div>
-//   </div>
-// );
 
 const FormRadioGroup = ({ label, value, options, onChange, required }) => (
   <div className="mt-4">
@@ -210,32 +169,6 @@ const FormRadioGroup = ({ label, value, options, onChange, required }) => (
   </div>
 );
 
-
-// const FormRadioGroup = ({ label, value, options, onChange }) => (
-//   <div className="mt-4">
-//     <label className="font-Inter text-[#000000D9] font-medium text-[16px]">
-//       <span className="text-[#FF4D4F] ml-[2px]">*</span> {label}:
-//     </label>
-//     <div className="flex w-full flex-row mt-1 ml-2 justify-between">
-//       {options.map((option) => (
-//         <div
-//           key={option}
-//           className="flex w-1/2 font-Inter font-normal text-[16px] items-center"
-//         >
-//           <input
-//             type="radio"
-//             value={option}
-//             checked={value === option}
-//             onChange={() => onChange(option)}
-//             className="mr-4 h-[26px] w-[26px]"
-//             required
-//           />
-//           {option}
-//         </div>
-//       ))}
-//     </div>
-//   </div>
-// );
 const FormRadioGroup2 = ({ label, value, options, onChange }) => (
   <div className="mt-4">
     <label className="font-Inter text-[#000000D9] font-semibold text-[18px]">
@@ -261,7 +194,6 @@ const FormRadioGroup2 = ({ label, value, options, onChange }) => (
     </div>
   </div>
 );
-
 
 const LocationEnteringGroup = ({ labels, texts, values, setters }) => (
   <div className="w-full flex flex-row justify-between text-black">
@@ -294,7 +226,6 @@ const LocationDetails = ({
   setCity,
 }) => {
   const [position, setPosition] = useState([51.505, -0.09]);
-  const [errors, setErrors] = useState({});
   const [formData, setFormData] = useState({ building, locality, landmark, city });
 
   useEffect(() => {
@@ -310,41 +241,6 @@ const LocationDetails = ({
     }
   }, [locality, city]);
 
-  const validateForm = () => {
-    const newErrors = {};
-    if (!formData.building) newErrors.building = 'Building/Society Name is required';
-    if (!formData.locality) newErrors.locality = 'Locality/Area is required';
-    if (!formData.landmark) newErrors.landmark = 'Landmark/Street Name is required';
-    if (!formData.city) newErrors.city = 'City is required';
-    return newErrors;
-  };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    const validationErrors = validateForm();
-    if (Object.keys(validationErrors).length > 0) {
-      setErrors(validationErrors);
-      return;
-    }
-
-    // Submit data to the database
-    fetch('/api/location', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(formData),
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        if (data.success) {
-          alert('Location details saved successfully!');
-        } else {
-          alert('Failed to save location details');
-        }
-      });
-  };
-
   const handleChange = (e, setter) => {
     setter(e.target.value);
     setFormData({
@@ -354,7 +250,7 @@ const LocationDetails = ({
   };
 
   return (
-    <div className="w-full overflow-y-auto overflow-x-hidden" >
+    <div className="w-full overflow-y-auto overflow-x-hidden">
       <div className="w-[51.25rem] flex flex-col space-y-10 ml-14 mt-6">
         <div className="h-16 w-full">
           <LocationEnteringGroup
@@ -367,8 +263,6 @@ const LocationDetails = ({
               (value) => handleChange({ target: { name: 'locality', value } }, setLocality),
             ]}
           />
-          {errors.building && <p className="text-red-500">{errors.building}</p>}
-          {errors.locality && <p className="text-red-500">{errors.locality}</p>}
         </div>
         <div className="h-16 w-full">
           <LocationEnteringGroup
@@ -381,8 +275,6 @@ const LocationDetails = ({
               (value) => handleChange({ target: { name: 'city', value } }, setCity),
             ]}
           />
-          {errors.landmark && <p className="text-red-500">{errors.landmark}</p>}
-          {errors.city && <p className="text-red-500">{errors.city}</p>}
         </div>
         <div className="h-96 w-full">
           <MapContainer center={position} zoom={13} style={{ height: '100%', width: '100%' }}>
@@ -402,9 +294,20 @@ const LocationDetails = ({
   );
 };
 
-const Features = ({ isPetsAllowed,setIsPetsAllowed,waterSupply,setWaterSupply,electricity,setElectricity,reservedParking,setReservedParking,cctv,setCctv }) => {
+const Features = ({
+  isPetsAllowed,
+  setIsPetsAllowed,
+  waterSupply,
+  setWaterSupply,
+  electricity,
+  setElectricity,
+  reservedParking,
+  setReservedParking,
+  cctv,
+  setCctv,
+}) => {
   return (
-    <div className="flex flex-col w-[51.25rem] h-[70vh] mt-[2.25rem] ml-[4.875rem] space-y-[3.75rem] ">
+    <div className="flex flex-col w-[51.25rem] h-[70vh] mt-[2.25rem] ml-[4.875rem] space-y-[3.75rem]">
       <div className="flex flex-col space-y-[3.75rem]">
         <h1 className="font-Inter font-semibold text-[18px]">
           General Features
@@ -435,12 +338,11 @@ const Features = ({ isPetsAllowed,setIsPetsAllowed,waterSupply,setWaterSupply,el
         <h1 className="font-Inter font-semibold text-[18px]">
           SOCIETY AMENITIES
         </h1>
-        <div className="flex flex-row space-x-[5rem] ">
-          <div className="w-[8.438rem] h-[6rem]  flex flex-col space-y-[1rem]">
+        <div className="flex flex-row space-x-[5rem]">
+          <div className="w-[8.438rem] h-[6rem] flex flex-col space-y-[1rem]">
             <div className="flex flex-col items-center justify-center">
-              <img className="w-[35px] h-[34px]" src="cctv.png" />
+              <img className="w-[35px] h-[34px]" src="cctv.png" alt="cctv" />
               <h1 className="font-Inter font-normal text-center text-[14px] text-[#7A7A7A]">
-                {" "}
                 CCTV Camera
               </h1>
             </div>
@@ -448,17 +350,15 @@ const Features = ({ isPetsAllowed,setIsPetsAllowed,waterSupply,setWaterSupply,el
               <input
                 type="checkbox"
                 className="h-[26px] w-[26px]"
-                value={cctv}
-                onClick={setCctv("Yes")}
-                
+                checked={cctv === "Yes"}
+                onChange={() => setCctv(cctv === "Yes" ? "No" : "Yes")}
               />
             </div>
           </div>
-          <div className="w-[8.438rem] h-[6rem]  flex flex-col space-y-[1rem]">
+          <div className="w-[8.438rem] h-[6rem] flex flex-col space-y-[1rem]">
             <div className="flex flex-col items-center justify-center">
-              <img className="w-[35px] h-[34px]" src="parking.png" />
+              <img className="w-[35px] h-[34px]" src="parking.png" alt="parking" />
               <h1 className="font-Inter font-normal text-center text-[14px] text-[#7A7A7A]">
-                {" "}
                 Reserved Parking
               </h1>
             </div>
@@ -466,9 +366,8 @@ const Features = ({ isPetsAllowed,setIsPetsAllowed,waterSupply,setWaterSupply,el
               <input
                 type="checkbox"
                 className="h-[26px] w-[26px]"
-                value={reservedParking}
-                onClick={setReservedParking("Yes")}
-                
+                checked={reservedParking === "Yes"}
+                onChange={() => setReservedParking(reservedParking === "Yes" ? "No" : "Yes")}
               />
             </div>
           </div>
@@ -476,13 +375,22 @@ const Features = ({ isPetsAllowed,setIsPetsAllowed,waterSupply,setWaterSupply,el
       </div>
     </div>
   );
-}
+};
 
-
-
-const PriceDetails = ({ rent, setRent, mentinence, setMentinence, mentinencePrice, setMentinencePrice, mentinenceType, setMentinenceType, security, setSecurity }) => {
+const PriceDetails = ({
+  rent,
+  setRent,
+  maintenance,
+  setMaintenance,
+  maintenancePrice,
+  setMaintenancePrice,
+  maintenanceType,
+  setMaintenanceType,
+  security,
+  setSecurity,
+}) => {
   return (
-    <div className="flex flex-col w-[51.25rem] h-[50vh] mt-[2.25rem] ml-[4.875rem] space-y-[3.75rem] ">
+    <div className="flex flex-col w-[51.25rem] h-[50vh] mt-[2.25rem] ml-[4.875rem] space-y-[3.75rem]">
       <div className="w-full flex flex-row justify-between text-black">
         <div className="flex h-[40px] flex-col justify-between">
           <label className="font-Inter font-medium mb-2 text-[16px]">
@@ -533,15 +441,15 @@ const PriceDetails = ({ rent, setRent, mentinence, setMentinence, mentinencePric
           <label className="font-Inter font-medium mb-2 text-[16px]">
             Maintenance<span className="text-[#FF4D4F] ml-[2px]">*</span>
           </label>
-          <div className=" w-[23.75rem] h-[36px]">
+          <div className="w-[23.75rem] h-[36px]">
             <select
-              value={mentinence}
-              onChange={(e) => setMentinence(e.target.value)}
+              value={maintenance}
+              onChange={(e) => setMaintenance(e.target.value)}
               required
               className="border border-[#D9D9D9] h-[36px] text-end px-2 py-1 text-black pl-6 pr-16 border-[2px] focus:outline-none w-full"
             >
               <option
-                value="Included in Rent "
+                value="Included in Rent"
                 className="font-Inter font-normal text-[#122B49] text-[14px] border-[1px] border-[#7A7A7A] rounded-[2px]"
               >
                 Included in Rent
@@ -555,32 +463,32 @@ const PriceDetails = ({ rent, setRent, mentinence, setMentinence, mentinencePric
             </select>
           </div>
         </div>
-        <div className="flex  flex-col justify-between">
+        <div className="flex flex-col justify-between">
           <label className="font-Inter font-medium mb-2 text-[16px]">
             <span className="text-[#FF4D4F] ml-[2px]">*</span>
           </label>
-          <div className="flex w-[23.75rem] justify-between h-[36px]  flex-row">
-            <div className=" relative w-[11.35rem]">
+          <div className="flex w-[23.75rem] justify-between h-[36px] flex-row">
+            <div className="relative w-[11.35rem]">
               <span className="absolute text-[#00000040] inset-y-0 left-0 pl-2 flex items-center pointer-events-none">
                 ₹
               </span>
               <input
                 type="text"
                 placeholder=""
-                value={mentinencePrice}
+                value={maintenancePrice}
                 required
-                onChange={(e) => setMentinencePrice(e.target.value)}
+                onChange={(e) => setMaintenancePrice(e.target.value)}
                 className="border border-[#D9D9D9] text-end px-2 py-1 text-black pl-6 pr-16 border-[2px] focus:outline-none w-full"
               />
               <span className="absolute text-[#00000040] inset-y-0 right-0 pr-2 flex items-center pointer-events-none">
-                Mentinence
+                Maintenance
               </span>
             </div>
-            <div className="  w-[11.35rem]">
+            <div className="w-[11.35rem]">
               <select
-                value={mentinenceType}
+                value={maintenanceType}
                 required
-                onChange={(e) => setMentinenceType(e.target.value)}
+                onChange={(e) => setMaintenanceType(e.target.value)}
                 className="border border-[#D9D9D9] h-[36px] text-end px-2 py-1 text-black pl-6 pr-16 border-[2px] focus:outline-none w-full"
               >
                 <option
@@ -590,10 +498,10 @@ const PriceDetails = ({ rent, setRent, mentinence, setMentinence, mentinencePric
                   Monthly
                 </option>
                 <option
-                  value="Anually"
+                  value="Annually"
                   className="font-Inter font-normal text-[#122B49] text-[14px] border-[1px] border-[#7A7A7A] rounded-[2px]"
                 >
-                  Anually
+                  Annually
                 </option>
               </select>
             </div>
@@ -602,11 +510,9 @@ const PriceDetails = ({ rent, setRent, mentinence, setMentinence, mentinencePric
       </div>
     </div>
   );
-}
+};
 
 const PropImages = () => {
-
-    
   return (
     <div className="flex flex-col w-[51.25rem] h-[50vh] mt-[2.25rem] ml-[4.875rem] space-y-[2.5rem]">
       <h1 className="font-Inter text-[18px] font-normal">
@@ -620,8 +526,8 @@ const PropImages = () => {
         <div className="flex items-center border-[1px] p-[10rem] border-[#D6D6D6] mt-4 justify-center h-[19.313rem]">
           <div className="w-[11rem] flex flex-col items-center h-[4.625rem]">
             <img src="camera.png" alt="camera" />
-            <div className="flex w-[11rem] h-[2.5rem]  items-center bg-[#122B46] text-white p-2 rounded-md">
-              <div className="flex-shrink-0 w-6 h-4 text-[26px]  text-white flex items-center justify-center mr-2">
+            <div className="flex w-[11rem] h-[2.5rem] items-center bg-[#122B46] text-white p-2 rounded-md">
+              <div className="flex-shrink-0 w-6 h-4 text-[26px] text-white flex items-center justify-center mr-2">
                 +
               </div>
               <h1 className="font-Inter text-[16px] font-medium">
@@ -643,9 +549,7 @@ const PropImages = () => {
       </div>
     </div>
   );
-}
-
-
+};
 
 const About = () => {
   const [propertyFor, setPropertyFor] = useState("Rent");
@@ -664,57 +568,33 @@ const About = () => {
   const [cctv, setCctv] = useState("No");
   const [rent, setRent] = useState("");
   const [security, setSecurity] = useState("");
-  const [mentinence, setMentinence] = useState('');
-  const [mentinencePrice, setMentinencePrice] = useState("");
-  const [mentinenceType, setMentinenceType] = useState("Monthly");
-
+  const [maintenance, setMaintenance] = useState("");
+  const [maintenancePrice, setMaintenancePrice] = useState("");
+  const [maintenanceType, setMaintenanceType] = useState("Monthly");
 
   const navigate = useNavigate();
-  const [showOverlay,setShowOverlay] = useState(false)
- 
+  const [showOverlay, setShowOverlay] = useState(false);
 
-  const handleSubmit = async(e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     const userId = 1;
     let data, url;
 
     if (isActive === "location-details") {
-      data = {
-        building,
-        locality,
-        landmark,
-        city,
-      };
+      data = { building, locality, landmark, city };
       url = `http://localhost:5000/update2/${userId}`;
-    }else if (isActive === "features") {
-      data = {
-        isPetsAllowed,
-        waterSupply,
-        electricity,
-        cctv,
-        reservedParking,
-      };
+    } else if (isActive === "features") {
+      data = { isPetsAllowed, waterSupply, electricity, cctv, reservedParking };
       url = `http://localhost:5000/update3/${userId}`;
     } else if (isActive === "price-details") {
-      data = {
-        rent,
-        security,
-        mentinence,
-        mentinenceType,
-        mentinencePrice,
-      };
+      data = { rent, security, maintenance, maintenanceType, maintenancePrice };
       url = `http://localhost:5000/update4/${userId}`;
     } else if (isActive === "prop-images") {
-      setShowOverlay(true) 
+      setShowOverlay(true);
+      return;
     } else {
-      data = {
-        propertyFor,
-        propertyType,
-        propertySubType,
-        propertyAge,
-        bhkType,
-      };
+      data = { propertyFor, propertyType, propertySubType, propertyAge, bhkType };
       url = `http://localhost:5000/update/${userId}`;
     }
 
@@ -722,10 +602,10 @@ const About = () => {
       const response = await axios.put(url, data);
       console.log(response.data);
 
-      if (isActive === "location-details") {
-        setIsActive("features");
-      } else if (isActive === "prop-details") {
+      if (isActive === "prop-details") {
         setIsActive("location-details");
+      } else if (isActive === "location-details") {
+        setIsActive("features");
       } else if (isActive === "features") {
         setIsActive("price-details");
       } else if (isActive === "price-details") {
@@ -738,15 +618,14 @@ const About = () => {
 
   const handleContinue = () => {
     navigate("/thanks");
-  }
+  };
 
   const handleCancel = () => {
     setShowOverlay(false);
-  }
-  
-
+  };
 
   const [isActive, setIsActive] = useState(TABS[0].id);
+
   const getTabClassName = (index) =>
     index >= TABS.findIndex((tab) => tab.id === isActive)
       ? "bg-[#D6D6D6]"
@@ -768,18 +647,20 @@ const About = () => {
           />
         );
       case "features":
-        return (<Features
-          isPetsAllowed={isPetsAllowed}
-          setIsPetsAllowed={setIsPetsAllowed}
-          waterSupply={waterSupply}
-          setWaterSupply={setWaterSupply}
-          electricity={electricity}
-          setElectricity={setElectricity}
-          reservedParking={reservedParking}
-          setReservedParking={setReservedParking}
-          cctv={cctv}
-          setCctv={setCctv}     
-        />);
+        return (
+          <Features
+            isPetsAllowed={isPetsAllowed}
+            setIsPetsAllowed={setIsPetsAllowed}
+            waterSupply={waterSupply}
+            setWaterSupply={setWaterSupply}
+            electricity={electricity}
+            setElectricity={setElectricity}
+            reservedParking={reservedParking}
+            setReservedParking={setReservedParking}
+            cctv={cctv}
+            setCctv={setCctv}
+          />
+        );
       case "price-details":
         return (
           <PriceDetails
@@ -787,16 +668,16 @@ const About = () => {
             setRent={setRent}
             security={security}
             setSecurity={setSecurity}
-            mentinence={mentinence}
-            setMentinence={setMentinence}
-            mentinenceType={mentinenceType}
-            setMentinenceType={setMentinenceType}
-            mentinencePrice={mentinencePrice}
-            setMentinencePrice={setMentinencePrice}
+            maintenance={maintenance}
+            setMaintenance={setMaintenance}
+            maintenanceType={maintenanceType}
+            setMaintenanceType={setMaintenanceType}
+            maintenancePrice={maintenancePrice}
+            setMaintenancePrice={setMaintenancePrice}
           />
         );
       case "prop-images":
-        return <PropImages/>;
+        return <PropImages />;
       default:
       case "prop-details":
         return (
@@ -818,11 +699,10 @@ const About = () => {
 
   return (
     <div className="h-[130vh] w-full bg-[#ffffff]">
-      <Header />
       <div className="flex flex-col w-[61rem] h-[34.5rem] mt-[8.125rem] rounded-[1rem] shadow-md shadow-[#122B492E] ml-[14.5rem] bg-[#FFFFFF]">
         <div className="w-full h-[5.5rem] flex flex-col">
           <div className="h-[5rem] flex flex-row w-full bg-[#FCF8F4]">
-            {TABS.map((tab, index) => (
+            {TABS.map((tab) => (
               <div
                 key={tab.id}
                 className={`${
@@ -866,18 +746,23 @@ const About = () => {
               </button>
               {showOverlay && (
                 <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
-                  <div className="flex items-center justify-center h-[15.75rem] w-[29.313rem]  bg-[#ffffff] p-8 rounded-lg">
-                    <div className=" flex flex-col justify-center w-[24.313rem] h-[6.668rem]">
-                      <h1 className=" text-[#122B46] font-Inter text-center font-medium text-[16px]">
+                  <div className="flex items-center justify-center h-[15.75rem] w-[29.313rem] bg-[#ffffff] p-8 rounded-lg">
+                    <div className="flex flex-col justify-center w-[24.313rem] h-[6.668rem]">
+                      <h1 className="text-[#122B46] font-Inter text-center font-medium text-[16px]">
                         POST PROPERTY ON DYLAN ESTATE?
                       </h1>
                       <div className="flex flex-col mt-5 w-full h-[3.75rem] space-y-[10px]">
-                        <button onClick= {handleContinue} className="w-full bg-[#122B46] h-[2.55rem]  text-center font-MerriweatherSans font-bold text-[16px] rounded-[4px]">
+                        <button
+                          onClick={handleContinue}
+                          className="w-full bg-[#122B46] h-[2.55rem] text-center font-MerriweatherSans font-bold text-[16px] rounded-[4px]"
+                        >
                           Continue
                         </button>
-                        <p className=" text-[#122B49] font-MerriweatherSans text-center font-light text-[12px]">
+                        <p className="text-[#122B49] font-MerriweatherSans text-center font-light text-[12px]">
                           By continuing you agree to our{" "}
-                          <span className="underline font-normal ">Terms and Conditions & Privacy Policy</span>
+                          <span className="underline font-normal">
+                            Terms and Conditions & Privacy Policy
+                          </span>
                         </p>
                       </div>
                     </div>

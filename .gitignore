@@ -1,0 +1,22 @@
+# Python
+flask_server/menv/
+flask_server/__pycache__/
+flask_server/**/__pycache__/
+*.pyc
+*.pyo
+
+# SQLite database
+flask_server/instance/*.db
+
+# Node
+Propdeal-client/node_modules/
+Propdeal-client/build/
+
+# Environment variables
+.env
+.env.local
+.env.production
+
+# OS
+.DS_Store
+Thumbs.db

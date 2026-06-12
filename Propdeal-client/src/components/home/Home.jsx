@@ -100,28 +100,26 @@ function Home() {
                 <div className="w-full h-[16rem] overflow-y-auto overflow-x-hidden">
                   <div className="w-full h-[43.063rem] bg-[#ffffff]">
                     <div className="mt-[2rem] ml-[3rem] flex flex-col">
-                      <lable className="font-Inter font-medium text-[18px]">
-                        {" "}
-                        <span className="text-[#FF4D4F] ml-[2px]">*</span> I am
-                        :
-                      </lable>
-                      <div className="flex w-full flex-row w-full mt-1 ml-2 justify-between">
+                      <label className="font-Inter font-medium text-[18px]">
+                        <span className="text-[#FF4D4F] ml-[2px]">*</span> I am:
+                      </label>
+                      <div className="flex flex-row w-full mt-1 ml-2 justify-between">
                         <div className="flex w-1/2 font-Inter font-normal text-[16px] items-center">
                           <input
                             type="radio"
                             value="owner"
                             checked={role === "owner"}
-                            onchange={() => setRole("owner")}
+                            onChange={() => setRole("owner")}
                             className="mr-4 h-[26px] w-[26px]"
                           />
                           Owner
                         </div>
-                        <div className="flex w-1/2 font-Inter font-normal text-[16px] items-center ">
+                        <div className="flex w-1/2 font-Inter font-normal text-[16px] items-center">
                           <input
                             type="radio"
                             value="builder"
-                            check={role === "builder"}
-                            onchange={() => setRole("builder")}
+                            checked={role === "builder"}
+                            onChange={() => setRole("builder")}
                             className="mr-5 h-[26px] w-[26px]"
                           />
                           Builder
