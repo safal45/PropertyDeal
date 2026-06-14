@@ -1,0 +1,108 @@
+- generic [ref=e3]:
+  - generic [ref=e4]:
+    - link "PropertyDeal" [ref=e5] [cursor=pointer]:
+      - /url: /
+      - img [ref=e6]
+      - heading "PropertyDeal" [level=1] [ref=e7]
+    - generic [ref=e8]:
+      - link "PROPERTIES" [ref=e10] [cursor=pointer]:
+        - /url: /
+      - link "MY DASHBOARD/ACTIVITY" [ref=e12] [cursor=pointer]:
+        - /url: /preview
+      - link "LIST YOUR PROPERTY" [ref=e14] [cursor=pointer]:
+        - /url: /more-detail
+      - button [ref=e17] [cursor=pointer]:
+        - img [ref=e18]
+  - main [ref=e21]:
+    - generic [ref=e178]:
+      - generic [ref=e180]:
+        - link "Back to listings" [ref=e181] [cursor=pointer]:
+          - /url: /
+          - img [ref=e182]
+          - text: Back to listings
+        - generic [ref=e184]:
+          - generic [ref=e185]: Rent
+          - generic [ref=e186]: Residential
+        - heading "1 BHK Flat/Apartment" [level=1] [ref=e187]
+        - generic [ref=e188]:
+          - img [ref=e189]
+          - paragraph [ref=e191]: Hiranandani Gardens, Powai, Powai Lake, Mumbai, Maharashtra
+        - paragraph [ref=e192]: Listed on 14 June 2026
+      - generic [ref=e193]:
+        - generic [ref=e195]:
+          - generic [ref=e196]:
+            - paragraph [ref=e197]: Monthly Rent
+            - paragraph [ref=e198]: Rs. 28,000/mo
+          - generic [ref=e200]:
+            - text: Security Deposit
+            - paragraph [ref=e201]: Rs. 56,000
+        - generic [ref=e202]:
+          - heading "Property Details" [level=2] [ref=e203]
+          - generic [ref=e204]:
+            - generic [ref=e205]:
+              - generic [ref=e206]: Listed For
+              - generic [ref=e207]: Rent
+            - generic [ref=e208]:
+              - generic [ref=e209]: Type
+              - generic [ref=e210]: Residential
+            - generic [ref=e211]:
+              - generic [ref=e212]: Subtype
+              - generic [ref=e213]: Flat/Apartment
+            - generic [ref=e214]:
+              - generic [ref=e215]: Configuration
+              - generic [ref=e216]: 1 BHK
+            - generic [ref=e217]:
+              - generic [ref=e218]: Property Age
+              - generic [ref=e219]: 5-10 Years
+        - generic [ref=e220]:
+          - heading "Location" [level=2] [ref=e221]
+          - generic [ref=e222]:
+            - generic [ref=e223]:
+              - generic [ref=e224]: Building
+              - generic [ref=e225]: Hiranandani Gardens
+            - generic [ref=e226]:
+              - generic [ref=e227]: Locality
+              - generic [ref=e228]: Powai
+            - generic [ref=e229]:
+              - generic [ref=e230]: Landmark
+              - generic [ref=e231]: Powai Lake
+            - generic [ref=e232]:
+              - generic [ref=e233]: City
+              - generic [ref=e234]: Mumbai, Maharashtra
+          - generic [ref=e236]:
+            - button "Marker" [ref=e237] [cursor=pointer]
+            - generic:
+              - generic [ref=e238]:
+                - button "Zoom in" [ref=e239] [cursor=pointer]: +
+                - button "Zoom out" [ref=e240] [cursor=pointer]: −
+              - generic [ref=e241]:
+                - link "Leaflet" [ref=e242] [cursor=pointer]:
+                  - /url: https://leafletjs.com
+                  - img [ref=e243]
+                  - text: Leaflet
+                - text: "| ©"
+                - link "OpenStreetMap" [ref=e247] [cursor=pointer]:
+                  - /url: https://www.openstreetmap.org/copyright
+                - text: contributors
+        - generic [ref=e248]:
+          - heading "Features & Amenities" [level=2] [ref=e249]
+          - generic [ref=e250]:
+            - generic [ref=e251]:
+              - generic [ref=e252]: 🐾
+              - generic [ref=e253]: Pets Allowed
+            - generic [ref=e254]:
+              - generic [ref=e255]: 🚗
+              - generic [ref=e256]: Reserved Parking
+            - generic [ref=e257]:
+              - generic [ref=e258]: 📹
+              - generic [ref=e259]: CCTV
+            - generic [ref=e260]:
+              - generic [ref=e261]: 💧
+              - generic [ref=e262]: "Water: Both"
+            - generic [ref=e263]:
+              - generic [ref=e264]: ⚡
+              - generic [ref=e265]: "Power: Rare/No Powercut"
+        - link "Back to all listings" [ref=e267] [cursor=pointer]:
+          - /url: /
+          - img [ref=e268]
+          - text: Back to all listings

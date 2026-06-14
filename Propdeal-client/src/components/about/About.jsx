@@ -6,6 +6,7 @@ import axios from "axios";
 import markerIcon from "leaflet/dist/images/marker-icon.png";
 import markerShadow from "leaflet/dist/images/marker-shadow.png";
 import { useNavigate } from "react-router-dom";
+import API_BASE from "../../config";
 
 let DefaultIcon = L.icon({
   iconUrl: markerIcon,
@@ -34,90 +35,65 @@ const PropertyForm = ({
   bhkType,
   setBhkType,
 }) => {
-  const [formSubmitted, setFormSubmitted] = useState(false);
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    setFormSubmitted(true);
-    if (isFormValid()) {
-      console.log('Form submitted');
-    }
-  };
-
-  const isFormValid = () => {
-    return (
-      propertyFor &&
-      propertyType &&
-      propertySubType &&
-      propertyAge &&
-      bhkType
-    );
-  };
-
   return (
-    <div className="w-full p-12">
-      <form onSubmit={handleSubmit}>
-        <FormRadioGroup
-          label="Property For"
-          value={propertyFor}
-          options={["Rent", "Sale"]}
-          onChange={setPropertyFor}
-          required
-        />
-        <FormRadioGroup
-          label="Property Type"
-          value={propertyType}
-          options={["Residential", "Commercial", "Land/Plot"]}
-          onChange={setPropertyType}
-          required
-        />
-        {propertyType === "Residential" && (
-          <FormButtonGroup
-            label="Property SubType"
-            options={["Flat/Apartment", "House/Villa"]}
-            selectedOption={propertySubType}
-            onClick={setPropertySubType}
-          />
-        )}
-        {propertyType === "Commercial" && (
-          <FormButtonGroup
-            label="Property SubType"
-            options={[
-              "Office Space",
-              "Co-working",
-              "Restaurant/Cafe",
-              "Industrial Building",
-              "Industrial Shed",
-              "Warehouse/Godown",
-            ]}
-            selectedOption={propertySubType}
-            onClick={setPropertySubType}
-          />
-        )}
+    <div className="w-full p-8">
+      <FormRadioGroup
+        label="Property For"
+        value={propertyFor}
+        options={["Rent", "Sale"]}
+        onChange={setPropertyFor}
+        required
+      />
+      <FormRadioGroup
+        label="Property Type"
+        value={propertyType}
+        options={["Residential", "Commercial", "Land/Plot"]}
+        onChange={setPropertyType}
+        required
+      />
+      {propertyType === "Residential" && (
         <FormButtonGroup
-          label="Property Age"
-          options={[
-            "Less than 1 Year",
-            "1-3 Years",
-            "3-5 Years",
-            "5-10 Years",
-            "Greater than 10 Years",
-          ]}
-          selectedOption={propertyAge}
-          onClick={setPropertyAge}
-          required
+          label="Property SubType"
+          options={["Flat/Apartment", "House/Villa"]}
+          selectedOption={propertySubType}
+          onClick={setPropertySubType}
         />
-        <FormButtonGroup
-          label="BHK Type:"
-          options={["1 RK", "1 BHK", "2 BHK", "3 BHK", "4 BHK", "5+ BHK"]}
-          selectedOption={bhkType}
-          onClick={setBhkType}
-          required
-        />
-      </form>
-      {formSubmitted && !isFormValid() && (
-        <p className="text-red-500">Please fill out all required fields.</p>
       )}
+      {propertyType === "Commercial" && (
+        <FormButtonGroup
+          label="Property SubType"
+          options={[
+            "Office Space",
+            "Co-working",
+            "Restaurant/Cafe",
+            "Industrial Building",
+            "Industrial Shed",
+            "Warehouse/Godown",
+          ]}
+          selectedOption={propertySubType}
+          onClick={setPropertySubType}
+        />
+      )}
+      <FormButtonGroup
+        label="Property Age"
+        options={[
+          "Less than 1 Year",
+          "1-3 Years",
+          "3-5 Years",
+          "5-10 Years",
+          "Greater than 10 Years",
+        ]}
+        selectedOption={propertyAge}
+        onClick={setPropertyAge}
+        required
+      />
+      <FormButtonGroup
+        label="BHK Type"
+        options={["1 RK", "1 BHK", "2 BHK", "3 BHK", "4 BHK", "5+ BHK"]}
+        selectedOption={bhkType}
+        onClick={setBhkType}
+        required
+      />
     </div>
   );
 };
@@ -224,6 +200,8 @@ const LocationDetails = ({
   setLandmark,
   setLocality,
   setCity,
+  onLatChange = null,
+  onLngChange = null,
 }) => {
   const [position, setPosition] = useState([51.505, -0.09]);
   const [formData, setFormData] = useState({ building, locality, landmark, city });
@@ -236,10 +214,12 @@ const LocationDetails = ({
           if (data.length > 0) {
             const { lat, lon } = data[0];
             setPosition([lat, lon]);
+            if (onLatChange) onLatChange(parseFloat(lat));
+            if (onLngChange) onLngChange(parseFloat(lon));
           }
         });
     }
-  }, [locality, city]);
+  }, [locality, city]); // eslint-disable-line react-hooks/exhaustive-deps
 
   const handleChange = (e, setter) => {
     setter(e.target.value);
@@ -571,60 +551,184 @@ const About = () => {
   const [maintenance, setMaintenance] = useState("");
   const [maintenancePrice, setMaintenancePrice] = useState("");
   const [maintenanceType, setMaintenanceType] = useState("Monthly");
+  const [isActive, setIsActive] = useState(TABS[0].id);
 
   const navigate = useNavigate();
   const [showOverlay, setShowOverlay] = useState(false);
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+  // V2 auth + submission state
+  const [propertyId, setPropertyId] = useState(null);
+  const [submitting, setSubmitting] = useState(false);
+  const [submitError, setSubmitError] = useState(null);
+  const [mapLat, setMapLat] = useState(null);
+  const [mapLng, setMapLng] = useState(null);
+  const [showAuth, setShowAuth] = useState(false);
+  const [authMode, setAuthMode] = useState('login');
+  const [authName, setAuthName] = useState('');
+  const [authEmail, setAuthEmail] = useState('');
+  const [authPassword, setAuthPassword] = useState('');
+  const [authError, setAuthError] = useState(null);
+  const [authLoading, setAuthLoading] = useState(false);
 
-    const userId = 1;
-    let data, url;
+  const getToken = () => localStorage.getItem('pd_token');
+  const setToken = (t) => localStorage.setItem('pd_token', t);
+  const clearToken = () => localStorage.removeItem('pd_token');
 
-    if (isActive === "location-details") {
-      data = { building, locality, landmark, city };
-      url = `http://localhost:5000/update2/${userId}`;
-    } else if (isActive === "features") {
-      data = { isPetsAllowed, waterSupply, electricity, cctv, reservedParking };
-      url = `http://localhost:5000/update3/${userId}`;
-    } else if (isActive === "price-details") {
-      data = { rent, security, maintenance, maintenanceType, maintenancePrice };
-      url = `http://localhost:5000/update4/${userId}`;
-    } else if (isActive === "prop-images") {
-      setShowOverlay(true);
-      return;
-    } else {
-      data = { propertyFor, propertyType, propertySubType, propertyAge, bhkType };
-      url = `http://localhost:5000/update/${userId}`;
-    }
-
+  const handleAuthSubmit = async (onSuccess) => {
+    setAuthError(null);
+    setAuthLoading(true);
     try {
-      const response = await axios.put(url, data);
-      console.log(response.data);
-
-      if (isActive === "prop-details") {
-        setIsActive("location-details");
-      } else if (isActive === "location-details") {
-        setIsActive("features");
-      } else if (isActive === "features") {
-        setIsActive("price-details");
-      } else if (isActive === "price-details") {
-        setIsActive("prop-images");
-      }
-    } catch (error) {
-      console.error("Error making request:", error);
+      const url = authMode === 'register'
+        ? `${API_BASE}/auth/register`
+        : `${API_BASE}/auth/login`;
+      const body = authMode === 'register'
+        ? { name: authName, email: authEmail, password: authPassword }
+        : { email: authEmail, password: authPassword };
+      const res = await axios.post(url, body);
+      setToken(res.data.access_token);
+      setShowAuth(false);
+      onSuccess(res.data.access_token);
+    } catch (err) {
+      setAuthError(err.response?.data?.error || err.message || 'Authentication failed.');
+    } finally {
+      setAuthLoading(false);
     }
   };
 
-  const handleContinue = () => {
-    navigate("/thanks");
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setSubmitError(null);
+
+    if (isActive === "prop-images") {
+      setShowOverlay(true);
+      return;
+    }
+
+    const token = getToken();
+    if (!token) {
+      setShowAuth(true);
+      return;
+    }
+
+    const authHeader = { Authorization: `Bearer ${token}` };
+
+    const handleApiError = (err) => {
+      if (err.response?.status === 401) {
+        clearToken();
+        setShowAuth(true);
+      } else {
+        setSubmitError(err.response?.data?.error || err.message || 'Something went wrong.');
+      }
+    };
+
+    setSubmitting(true);
+    try {
+      if (isActive === "prop-details") {
+        let pid = propertyId;
+        if (!pid) {
+          const createRes = await axios.post(
+            `${API_BASE}/properties`,
+            {},
+            { headers: authHeader }
+          );
+          pid = createRes.data.property_id;
+          setPropertyId(pid);
+        }
+        await axios.patch(
+          `${API_BASE}/properties/${pid}/details`,
+          {
+            property_for: propertyFor,
+            property_type: propertyType,
+            property_subtype: propertySubType,
+            property_age: propertyAge,
+            bhk_type: bhkType,
+          },
+          { headers: authHeader }
+        );
+        setIsActive("location-details");
+
+      } else if (isActive === "location-details") {
+        if (!propertyId) {
+          setSubmitError('Please complete property details first.');
+          setIsActive('prop-details');
+          return;
+        }
+        await axios.patch(
+          `${API_BASE}/properties/${propertyId}/location`,
+          { building, locality, landmark, city, lat: mapLat, lng: mapLng },
+          { headers: authHeader }
+        );
+        setIsActive("features");
+
+      } else if (isActive === "features") {
+        if (!propertyId) {
+          setSubmitError('Please complete property details first.');
+          setIsActive('prop-details');
+          return;
+        }
+        await axios.patch(
+          `${API_BASE}/properties/${propertyId}/features`,
+          {
+            is_pets_allowed: isPetsAllowed === 'Yes',
+            reserved_parking: reservedParking === 'Yes',
+            cctv: cctv === 'Yes',
+            water_supply: waterSupply,
+            electricity: electricity,
+          },
+          { headers: authHeader }
+        );
+        setIsActive("price-details");
+
+      } else if (isActive === "price-details") {
+        if (!propertyId) {
+          setSubmitError('Please complete property details first.');
+          setIsActive('prop-details');
+          return;
+        }
+        await axios.patch(
+          `${API_BASE}/properties/${propertyId}/pricing`,
+          {
+            rent,
+            security_deposit: security,
+            maintenance,
+            maintenance_price: maintenancePrice,
+            maintenance_type: maintenanceType,
+          },
+          { headers: authHeader }
+        );
+        setIsActive("prop-images");
+      }
+    } catch (err) {
+      handleApiError(err);
+    } finally {
+      setSubmitting(false);
+    }
+  };
+
+  const handleContinue = async () => {
+    const token = getToken();
+    if (!propertyId || !token) {
+      setSubmitError('Session expired. Please log in again.');
+      setShowOverlay(false);
+      setShowAuth(true);
+      return;
+    }
+    try {
+      await axios.patch(
+        `${API_BASE}/properties/${propertyId}/publish`,
+        {},
+        { headers: { Authorization: `Bearer ${token}` } }
+      );
+      navigate("/thanks");
+    } catch (err) {
+      setSubmitError(err.response?.data?.error || err.message || "Failed to publish. Please try again.");
+      setShowOverlay(false);
+    }
   };
 
   const handleCancel = () => {
     setShowOverlay(false);
   };
-
-  const [isActive, setIsActive] = useState(TABS[0].id);
 
   const getTabClassName = (index) =>
     index >= TABS.findIndex((tab) => tab.id === isActive)
@@ -644,6 +748,8 @@ const About = () => {
             setLandmark={setLandmark}
             city={city}
             setCity={setCity}
+            onLatChange={setMapLat}
+            onLngChange={setMapLng}
           />
         );
       case "features":
@@ -698,8 +804,8 @@ const About = () => {
   };
 
   return (
-    <div className="h-[130vh] w-full bg-[#ffffff]">
-      <div className="flex flex-col w-[61rem] h-[34.5rem] mt-[8.125rem] rounded-[1rem] shadow-md shadow-[#122B492E] ml-[14.5rem] bg-[#FFFFFF]">
+    <div className="min-h-screen w-full bg-[#ffffff] py-6 overflow-x-hidden">
+      <div className="flex flex-col w-full max-w-[61rem] h-[38rem] rounded-[1rem] shadow-md shadow-[#122B492E] mx-auto bg-[#FFFFFF]">
         <div className="w-full h-[5.5rem] flex flex-col">
           <div className="h-[5rem] flex flex-row w-full bg-[#FCF8F4]">
             {TABS.map((tab) => (
@@ -727,36 +833,50 @@ const About = () => {
           </div>
         </div>
         <form onSubmit={handleSubmit}>
-          <div className="w-full flex rounded-b-[1rem] flex-col justify-between h-[29rem]">
-            <div className="overflow-y-auto overflow-x-hidden">
+          <div className="w-full flex rounded-b-[1rem] flex-col justify-between h-[32.5rem]">
+            <div className="flex-1 min-h-0 overflow-y-auto overflow-x-hidden">
               {renderActiveTabContent()}
             </div>
             <div className="h-[3.75rem] px-7 flex flex-row text-[#FFFFFF] items-center justify-between rounded-b-[1rem] bg-[#122B49]">
-              <h1 className="font-Inter font-normal ml-[1.25rem] text-[12px]">
-                Need Help? Call{" "}
-                <span className="font-Inter font-medium text-[12px]">
-                  9999999999
-                </span>
-              </h1>
+              <div className="flex flex-col ml-[1.25rem]">
+                <h1 className="font-Inter font-normal text-[12px]">
+                  Need Help? Call{" "}
+                  <span className="font-Inter font-medium text-[12px]">
+                    9999999999
+                  </span>
+                </h1>
+                {submitError && (
+                  <p className="font-Inter text-[11px] text-red-300 mt-0.5">{submitError}</p>
+                )}
+              </div>
               <button
                 type="submit"
-                className="bg-[#091524] font-inter font-normal rounded-[8px] mr-[1.5rem] text-[#FFFFFF] w-[6.875rem] h-[2rem]"
+                disabled={submitting}
+                className={`bg-[#091524] font-inter font-normal rounded-[8px] mr-[1.5rem] text-[#FFFFFF] w-[6.875rem] h-[2rem] transition-opacity ${submitting ? 'opacity-50 cursor-not-allowed' : ''}`}
               >
-                NEXT
+                {submitting ? '...' : 'NEXT'}
               </button>
               {showOverlay && (
-                <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
-                  <div className="flex items-center justify-center h-[15.75rem] w-[29.313rem] bg-[#ffffff] p-8 rounded-lg">
-                    <div className="flex flex-col justify-center w-[24.313rem] h-[6.668rem]">
+                <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50" onClick={handleCancel}>
+                  <div className="flex items-center justify-center w-[29.313rem] bg-[#ffffff] p-8 rounded-lg" onClick={(e) => e.stopPropagation()}>
+                    <div className="flex flex-col justify-center w-[24.313rem]">
                       <h1 className="text-[#122B46] font-Inter text-center font-medium text-[16px]">
-                        POST PROPERTY ON DYLAN ESTATE?
+                        POST PROPERTY ON PROPERTYDEAL?
                       </h1>
-                      <div className="flex flex-col mt-5 w-full h-[3.75rem] space-y-[10px]">
+                      <div className="flex flex-col mt-5 w-full space-y-[10px]">
                         <button
+                          type="button"
                           onClick={handleContinue}
                           className="w-full bg-[#122B46] h-[2.55rem] text-center font-MerriweatherSans font-bold text-[16px] rounded-[4px]"
                         >
                           Continue
+                        </button>
+                        <button
+                          type="button"
+                          onClick={handleCancel}
+                          className="w-full h-[2.55rem] text-center font-MerriweatherSans font-normal text-[14px] text-[#7A7A7A] hover:text-[#122B49] transition-colors"
+                        >
+                          Cancel
                         </button>
                         <p className="text-[#122B49] font-MerriweatherSans text-center font-light text-[12px]">
                           By continuing you agree to our{" "}
@@ -773,6 +893,66 @@ const About = () => {
           </div>
         </form>
       </div>
+
+      {/* Auth overlay — shown when no token is present */}
+      {showAuth && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50">
+          <div className="bg-white rounded-[14px] shadow-xl w-full max-w-sm p-8">
+            <h2 className="font-MerriweatherSans text-[20px] text-[#122B49] mb-1">
+              {authMode === 'login' ? 'Log in to continue' : 'Create an account'}
+            </h2>
+            <p className="font-Inter text-[13px] text-[#7A7A7A] mb-5">
+              {authMode === 'login'
+                ? 'Sign in to save and post your listing.'
+                : 'Create a free account to post your property.'}
+            </p>
+            {authMode === 'register' && (
+              <input
+                className="w-full border border-[#E5E7EB] rounded-[8px] px-4 py-2.5 font-Inter text-[14px] mb-3 outline-none focus:border-[#122B49]"
+                placeholder="Full name"
+                value={authName}
+                onChange={(e) => setAuthName(e.target.value)}
+              />
+            )}
+            <input
+              className="w-full border border-[#E5E7EB] rounded-[8px] px-4 py-2.5 font-Inter text-[14px] mb-3 outline-none focus:border-[#122B49]"
+              placeholder="Email address"
+              type="email"
+              value={authEmail}
+              onChange={(e) => setAuthEmail(e.target.value)}
+            />
+            <input
+              className="w-full border border-[#E5E7EB] rounded-[8px] px-4 py-2.5 font-Inter text-[14px] mb-4 outline-none focus:border-[#122B49]"
+              placeholder="Password"
+              type="password"
+              value={authPassword}
+              onChange={(e) => setAuthPassword(e.target.value)}
+            />
+            {authError && (
+              <p className="font-Inter text-[12px] text-red-500 mb-3">{authError}</p>
+            )}
+            <button
+              onClick={() => handleAuthSubmit(() => {
+                if (!propertyId) setIsActive('prop-details');
+                handleSubmit({ preventDefault: () => {} });
+              })}
+              disabled={authLoading}
+              className="w-full bg-[#122B49] text-white font-Inter font-medium text-[14px] py-3 rounded-[8px] hover:bg-[#0a1e34] transition-colors disabled:opacity-60"
+            >
+              {authLoading ? 'Please wait…' : authMode === 'login' ? 'Log in' : 'Create account'}
+            </button>
+            <p className="font-Inter text-[12px] text-[#7A7A7A] mt-4 text-center">
+              {authMode === 'login' ? "Don't have an account? " : 'Already have an account? '}
+              <button
+                className="text-[#122B49] underline"
+                onClick={() => { setAuthMode(authMode === 'login' ? 'register' : 'login'); setAuthError(null); }}
+              >
+                {authMode === 'login' ? 'Sign up' : 'Log in'}
+              </button>
+            </p>
+          </div>
+        </div>
+      )}
     </div>
   );
 };

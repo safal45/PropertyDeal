@@ -1,0 +1,24 @@
+- generic [ref=e3]:
+  - generic [ref=e4]:
+    - link "PropertyDeal" [ref=e5] [cursor=pointer]:
+      - /url: /
+      - img [ref=e6]
+      - heading "PropertyDeal" [level=1] [ref=e7]
+    - generic [ref=e8]:
+      - link "PROPERTIES" [ref=e10] [cursor=pointer]:
+        - /url: /
+      - link "MY DASHBOARD/ACTIVITY" [ref=e12] [cursor=pointer]:
+        - /url: /preview
+      - link "LIST YOUR PROPERTY" [ref=e14] [cursor=pointer]:
+        - /url: /more-detail
+      - button [ref=e17] [cursor=pointer]:
+        - img [ref=e18]
+  - main [ref=e21]:
+    - generic [ref=e23]:
+      - heading "Thank you for listing your property with us" [level=1] [ref=e24]
+      - paragraph [ref=e25]: Your listing will be reviewed and will go live within 24 hours.
+      - paragraph [ref=e26]: We will now manage your listing and get in touch with you after finding the best suitable tenant as per your preference.
+      - paragraph [ref=e27]: — PropertyDeal
+      - generic [ref=e28]:
+        - button "Edit Listing" [ref=e29] [cursor=pointer]
+        - button "View All Listings" [ref=e30] [cursor=pointer]

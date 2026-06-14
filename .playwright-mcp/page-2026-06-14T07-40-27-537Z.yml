@@ -1,0 +1,112 @@
+- generic [ref=e3]:
+  - generic [ref=e4]:
+    - link "PropertyDeal" [ref=e5] [cursor=pointer]:
+      - /url: /
+      - img [ref=e6]
+      - heading "PropertyDeal" [level=1] [ref=e7]
+    - generic [ref=e8]:
+      - link "PROPERTIES" [ref=e10] [cursor=pointer]:
+        - /url: /
+      - link "MY DASHBOARD/ACTIVITY" [ref=e12] [cursor=pointer]:
+        - /url: /preview
+      - link "LIST YOUR PROPERTY" [ref=e14] [cursor=pointer]:
+        - /url: /more-detail
+      - button [ref=e17] [cursor=pointer]:
+        - img [ref=e18]
+  - main [ref=e21]:
+    - generic [ref=e22]:
+      - generic [ref=e24]:
+        - link "Back to listings" [ref=e25] [cursor=pointer]:
+          - /url: /
+          - img [ref=e26]
+          - text: Back to listings
+        - generic [ref=e28]:
+          - generic [ref=e29]: Rent
+          - generic [ref=e30]: Residential
+        - heading "2 BHK Flat/Apartment" [level=1] [ref=e31]
+        - generic [ref=e32]:
+          - img [ref=e33]
+          - paragraph [ref=e35]: Raheja Residence, Andheri West, D.N. Nagar Metro Station, Mumbai, Maharashtra
+        - paragraph [ref=e36]: Listed on 14 June 2026
+      - generic [ref=e37]:
+        - generic [ref=e39]:
+          - generic [ref=e40]:
+            - paragraph [ref=e41]: Monthly Rent
+            - paragraph [ref=e42]: Rs. 45,000/mo
+          - generic [ref=e43]:
+            - generic [ref=e44]:
+              - text: Security Deposit
+              - paragraph [ref=e45]: Rs. 90,000
+            - generic [ref=e46]:
+              - generic [ref=e47]: Maintenance (Monthly)
+              - paragraph [ref=e48]: Rs. 2,500
+        - generic [ref=e49]:
+          - heading "Property Details" [level=2] [ref=e50]
+          - generic [ref=e51]:
+            - generic [ref=e52]:
+              - generic [ref=e53]: Listed For
+              - generic [ref=e54]: Rent
+            - generic [ref=e55]:
+              - generic [ref=e56]: Type
+              - generic [ref=e57]: Residential
+            - generic [ref=e58]:
+              - generic [ref=e59]: Subtype
+              - generic [ref=e60]: Flat/Apartment
+            - generic [ref=e61]:
+              - generic [ref=e62]: Configuration
+              - generic [ref=e63]: 2 BHK
+            - generic [ref=e64]:
+              - generic [ref=e65]: Property Age
+              - generic [ref=e66]: 3-5 Years
+        - generic [ref=e67]:
+          - heading "Location" [level=2] [ref=e68]
+          - generic [ref=e69]:
+            - generic [ref=e70]:
+              - generic [ref=e71]: Building
+              - generic [ref=e72]: Raheja Residence
+            - generic [ref=e73]:
+              - generic [ref=e74]: Locality
+              - generic [ref=e75]: Andheri West
+            - generic [ref=e76]:
+              - generic [ref=e77]: Landmark
+              - generic [ref=e78]: D.N. Nagar Metro Station
+            - generic [ref=e79]:
+              - generic [ref=e80]: City
+              - generic [ref=e81]: Mumbai, Maharashtra
+          - generic [ref=e83]:
+            - button "Marker" [ref=e84] [cursor=pointer]
+            - generic:
+              - generic [ref=e85]:
+                - button "Zoom in" [ref=e86] [cursor=pointer]: +
+                - button "Zoom out" [ref=e87] [cursor=pointer]: −
+              - generic [ref=e88]:
+                - link "Leaflet" [ref=e89] [cursor=pointer]:
+                  - /url: https://leafletjs.com
+                  - img [ref=e90]
+                  - text: Leaflet
+                - text: "| ©"
+                - link "OpenStreetMap" [ref=e94] [cursor=pointer]:
+                  - /url: https://www.openstreetmap.org/copyright
+                - text: contributors
+        - generic [ref=e95]:
+          - heading "Features & Amenities" [level=2] [ref=e96]
+          - generic [ref=e97]:
+            - generic [ref=e98]:
+              - generic [ref=e99]: 🐾
+              - generic [ref=e100]: Pets Allowed
+            - generic [ref=e101]:
+              - generic [ref=e102]: 🚗
+              - generic [ref=e103]: Reserved Parking
+            - generic [ref=e104]:
+              - generic [ref=e105]: 📹
+              - generic [ref=e106]: CCTV
+            - generic [ref=e107]:
+              - generic [ref=e108]: 💧
+              - generic [ref=e109]: "Water: Municipal Corporation (BMC)"
+            - generic [ref=e110]:
+              - generic [ref=e111]: ⚡
+              - generic [ref=e112]: "Power: Rare/No Powercut"
+        - link "Back to all listings" [ref=e114] [cursor=pointer]:
+          - /url: /
+          - img [ref=e115]
+          - text: Back to all listings

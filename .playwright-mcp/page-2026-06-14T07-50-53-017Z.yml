@@ -1,0 +1,68 @@
+- generic [ref=e3]:
+  - generic [ref=e4]:
+    - link "PropertyDeal" [ref=e5] [cursor=pointer]:
+      - /url: /
+      - img [ref=e6]
+      - heading "PropertyDeal" [level=1] [ref=e7]
+    - generic [ref=e8]:
+      - link "PROPERTIES" [ref=e10] [cursor=pointer]:
+        - /url: /
+      - link "MY DASHBOARD/ACTIVITY" [ref=e12] [cursor=pointer]:
+        - /url: /preview
+      - link "LIST YOUR PROPERTY" [ref=e14] [cursor=pointer]:
+        - /url: /more-detail
+      - button [active] [ref=e17] [cursor=pointer]:
+        - img [ref=e18]
+  - main [ref=e21]:
+    - generic [ref=e271]:
+      - generic [ref=e273]:
+        - heading "PROPERTY DETAILS" [level=1] [ref=e276]
+        - heading "LOCATION DETAILS" [level=1] [ref=e279]
+        - heading "FEATURES & AMENITIES" [level=1] [ref=e282]
+        - heading "PRICE DETAILS" [level=1] [ref=e285]
+        - heading "PROPERTY IMAGES" [level=1] [ref=e288]
+      - generic [ref=e296]:
+        - generic [ref=e298]:
+          - generic [ref=e299]:
+            - generic [ref=e300]: "* Property For:"
+            - generic [ref=e301]:
+              - generic [ref=e302]:
+                - radio [checked] [ref=e303]
+                - text: Rent
+              - generic [ref=e304]:
+                - radio [ref=e305]
+                - text: Sale
+          - generic [ref=e306]:
+            - generic [ref=e307]: "* Property Type:"
+            - generic [ref=e308]:
+              - generic [ref=e309]:
+                - radio [checked] [ref=e310]
+                - text: Residential
+              - generic [ref=e311]:
+                - radio [ref=e312]
+                - text: Commercial
+              - generic [ref=e313]:
+                - radio [ref=e314]
+                - text: Land/Plot
+          - generic [ref=e315]:
+            - generic [ref=e316]: Property SubType
+            - button "Flat/Apartment" [ref=e317] [cursor=pointer]
+            - button "House/Villa" [ref=e318] [cursor=pointer]
+          - generic [ref=e319]:
+            - generic [ref=e320]: Property Age
+            - button "Less than 1 Year" [ref=e321] [cursor=pointer]
+            - button "1-3 Years" [ref=e322] [cursor=pointer]
+            - button "3-5 Years" [ref=e323] [cursor=pointer]
+            - button "5-10 Years" [ref=e324] [cursor=pointer]
+            - button "Greater than 10 Years" [ref=e325] [cursor=pointer]
+          - generic [ref=e326]:
+            - generic [ref=e327]: BHK Type
+            - button "1 RK" [ref=e328] [cursor=pointer]
+            - button "1 BHK" [ref=e329] [cursor=pointer]
+            - button "2 BHK" [ref=e330] [cursor=pointer]
+            - button "3 BHK" [ref=e331] [cursor=pointer]
+            - button "4 BHK" [ref=e332] [cursor=pointer]
+            - button "5+ BHK" [ref=e333] [cursor=pointer]
+        - generic [ref=e334]:
+          - heading "Need Help? Call 9999999999" [level=1] [ref=e336]
+          - button "NEXT" [ref=e337] [cursor=pointer]

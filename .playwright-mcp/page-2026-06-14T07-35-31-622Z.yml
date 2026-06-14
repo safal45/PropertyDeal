@@ -1,0 +1,64 @@
+- generic [ref=e3]:
+  - generic [ref=e4]:
+    - link "PropertyDeal" [ref=e5] [cursor=pointer]:
+      - /url: /
+      - img [ref=e6]
+      - heading "PropertyDeal" [level=1] [ref=e7]
+    - generic [ref=e8]:
+      - link "PROPERTIES" [ref=e10] [cursor=pointer]:
+        - /url: /
+      - link "MY DASHBOARD/ACTIVITY" [ref=e12] [cursor=pointer]:
+        - /url: /preview
+      - link "LIST YOUR PROPERTY" [ref=e14] [cursor=pointer]:
+        - /url: /more-detail
+      - button [ref=e17] [cursor=pointer]:
+        - img [ref=e18]
+  - main [ref=e21]:
+    - generic [ref=e23]:
+      - generic [ref=e24]:
+        - heading "Published Listings" [level=1] [ref=e25]
+        - link "Browse all" [ref=e26] [cursor=pointer]:
+          - /url: /
+      - generic [ref=e27]:
+        - generic [ref=e28]:
+          - generic [ref=e29]:
+            - generic [ref=e30]:
+              - heading "1 BHK Flat/Apartment" [level=2] [ref=e31]
+              - generic [ref=e32]: Rent
+            - paragraph [ref=e33]: Hiranandani Gardens, Powai, Mumbai, Maharashtra
+          - paragraph [ref=e35]: Rs. 28,000/mo
+        - generic [ref=e36]:
+          - generic [ref=e37]:
+            - generic [ref=e38]:
+              - heading "Office Space" [level=2] [ref=e39]
+              - generic [ref=e40]: Rent
+            - paragraph [ref=e41]: Platina Business Park, Bandra Kurla Complex, Mumbai, Maharashtra
+          - paragraph [ref=e43]: Rs. 1,50,000/mo
+        - generic [ref=e44]:
+          - generic [ref=e45]:
+            - generic [ref=e46]:
+              - heading "2 BHK Flat/Apartment" [level=2] [ref=e47]
+              - generic [ref=e48]: Sale
+            - paragraph [ref=e49]: Lodha Splendora, Thane West, Thane, Maharashtra
+          - paragraph [ref=e51]: Rs. 1,05,00,000
+        - generic [ref=e52]:
+          - generic [ref=e53]:
+            - generic [ref=e54]:
+              - heading "4 BHK House/Villa" [level=2] [ref=e55]
+              - generic [ref=e56]: Sale
+            - paragraph [ref=e57]: Green Valley Villas, Lonavala, Lonavala, Maharashtra
+          - paragraph [ref=e59]: Rs. 85,00,000
+        - generic [ref=e60]:
+          - generic [ref=e61]:
+            - generic [ref=e62]:
+              - heading "2 BHK Flat/Apartment" [level=2] [ref=e63]
+              - generic [ref=e64]: Rent
+            - paragraph [ref=e65]: Raheja Residence, Andheri West, Mumbai, Maharashtra
+          - paragraph [ref=e67]: Rs. 45,000/mo
+        - generic [ref=e68]:
+          - generic [ref=e69]:
+            - generic [ref=e70]:
+              - heading "3 BHK Flat/Apartment" [level=2] [ref=e71]
+              - generic [ref=e72]: Rent
+            - paragraph [ref=e73]: Sea View Apartments, Bandra West, Mumbai, Maharashtra
+          - paragraph [ref=e75]: Rs. 95,000/mo

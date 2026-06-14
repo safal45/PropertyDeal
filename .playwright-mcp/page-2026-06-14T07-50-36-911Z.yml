@@ -1,0 +1,125 @@
+- generic [ref=e3]:
+  - generic [ref=e4]:
+    - link "PropertyDeal" [ref=e5] [cursor=pointer]:
+      - /url: /
+      - img [ref=e6]
+      - heading "PropertyDeal" [level=1] [ref=e7]
+    - generic [ref=e8]:
+      - link "PROPERTIES" [ref=e10] [cursor=pointer]:
+        - /url: /
+      - link "MY DASHBOARD/ACTIVITY" [ref=e12] [cursor=pointer]:
+        - /url: /preview
+      - link "LIST YOUR PROPERTY" [ref=e14] [cursor=pointer]:
+        - /url: /more-detail
+      - button [ref=e17] [cursor=pointer]:
+        - img [ref=e18]
+  - main [ref=e21]:
+    - generic [ref=e114]:
+      - generic [ref=e116]:
+        - generic [ref=e117]:
+          - heading "Find Your Next Property" [level=1] [ref=e118]
+          - paragraph [ref=e119]: Browse verified listings for rent and sale across India.
+        - link "+ List your property" [ref=e120] [cursor=pointer]:
+          - /url: /more-detail
+      - generic [ref=e121]:
+        - paragraph [ref=e122]:
+          - text: Showing
+          - generic [ref=e123]: 1–6
+          - text: of 6 listings
+        - generic [ref=e124]:
+          - generic [ref=e125]:
+            - generic [ref=e126]:
+              - img [ref=e128]
+              - generic [ref=e134]: Rent
+              - generic [ref=e135]: Residential
+            - generic [ref=e136]:
+              - heading "1 BHK Flat/Apartment" [level=2] [ref=e137]
+              - generic [ref=e138]:
+                - img [ref=e139]
+                - paragraph [ref=e141]: Hiranandani Gardens, Powai, Mumbai, Maharashtra
+              - generic [ref=e142]:
+                - generic [ref=e143]: Flat/Apartment
+                - generic [ref=e144]: 5-10 Years
+              - generic [ref=e145]:
+                - paragraph [ref=e147]: Rs. 28,000/mo
+                - button "Enquire" [ref=e148] [cursor=pointer]
+          - generic [ref=e149]:
+            - generic [ref=e150]:
+              - img [ref=e152]
+              - generic [ref=e159]: Rent
+              - generic [ref=e160]: Commercial
+            - generic [ref=e161]:
+              - heading "Office Space" [level=2] [ref=e162]
+              - generic [ref=e163]:
+                - img [ref=e164]
+                - paragraph [ref=e166]: Platina Business Park, Bandra Kurla Complex, Mumbai, Maharashtra
+              - generic [ref=e167]:
+                - generic [ref=e168]: Office Space
+                - generic [ref=e169]: Less than 1 Year
+              - generic [ref=e170]:
+                - paragraph [ref=e172]: Rs. 1,50,000/mo
+                - button "Enquire" [ref=e173] [cursor=pointer]
+          - generic [ref=e174]:
+            - generic [ref=e175]:
+              - img [ref=e177]
+              - generic [ref=e183]: Sale
+              - generic [ref=e184]: Residential
+            - generic [ref=e185]:
+              - heading "2 BHK Flat/Apartment" [level=2] [ref=e186]
+              - generic [ref=e187]:
+                - img [ref=e188]
+                - paragraph [ref=e190]: Lodha Splendora, Thane West, Thane, Maharashtra
+              - generic [ref=e191]:
+                - generic [ref=e192]: Flat/Apartment
+                - generic [ref=e193]: 1-3 Years
+              - generic [ref=e194]:
+                - paragraph [ref=e196]: Rs. 1,05,00,000
+                - button "Enquire" [ref=e197] [cursor=pointer]
+          - generic [ref=e198]:
+            - generic [ref=e199]:
+              - img [ref=e201]
+              - generic [ref=e207]: Sale
+              - generic [ref=e208]: Residential
+            - generic [ref=e209]:
+              - heading "4 BHK House/Villa" [level=2] [ref=e210]
+              - generic [ref=e211]:
+                - img [ref=e212]
+                - paragraph [ref=e214]: Green Valley Villas, Lonavala, Lonavala, Maharashtra
+              - generic [ref=e215]:
+                - generic [ref=e216]: House/Villa
+                - generic [ref=e217]: Less than 1 Year
+              - generic [ref=e218]:
+                - paragraph [ref=e220]: Rs. 85,00,000
+                - button "Enquire" [ref=e221] [cursor=pointer]
+          - generic [ref=e222]:
+            - generic [ref=e223]:
+              - img [ref=e225]
+              - generic [ref=e231]: Rent
+              - generic [ref=e232]: Residential
+            - generic [ref=e233]:
+              - heading "2 BHK Flat/Apartment" [level=2] [ref=e234]
+              - generic [ref=e235]:
+                - img [ref=e236]
+                - paragraph [ref=e238]: Raheja Residence, Andheri West, Mumbai, Maharashtra
+              - generic [ref=e239]:
+                - generic [ref=e240]: Flat/Apartment
+                - generic [ref=e241]: 3-5 Years
+              - generic [ref=e242]:
+                - paragraph [ref=e244]: Rs. 45,000/mo
+                - button "Enquire" [ref=e245] [cursor=pointer]
+          - generic [ref=e246]:
+            - generic [ref=e247]:
+              - img [ref=e249]
+              - generic [ref=e255]: Rent
+              - generic [ref=e256]: Residential
+            - generic [ref=e257]:
+              - heading "3 BHK Flat/Apartment" [level=2] [ref=e258]
+              - generic [ref=e259]:
+                - img [ref=e260]
+                - paragraph [ref=e262]: Sea View Apartments, Bandra West, Mumbai, Maharashtra
+              - generic [ref=e263]:
+                - generic [ref=e264]: Flat/Apartment
+                - generic [ref=e265]: 1-3 Years
+              - generic [ref=e266]:
+                - paragraph [ref=e268]: Rs. 95,000/mo
+                - button "Enquire" [ref=e269] [cursor=pointer]

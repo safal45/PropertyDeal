@@ -5,7 +5,7 @@ function Layout() {
     return (
       <div>
         <Header />
-        <main className=''>
+        <main className='pt-[72px]'>
           <Outlet />
         </main>
       </div>

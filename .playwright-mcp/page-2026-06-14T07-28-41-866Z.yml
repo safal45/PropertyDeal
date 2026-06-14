@@ -1,0 +1,105 @@
+- generic [ref=e3]:
+  - generic [ref=e4]:
+    - link "PropertyDeal" [ref=e5] [cursor=pointer]:
+      - /url: /
+      - img [ref=e6]
+      - heading "PropertyDeal" [level=1] [ref=e7]
+    - generic [ref=e8]:
+      - link "PROPERTIES" [ref=e10] [cursor=pointer]:
+        - /url: /
+      - link "MY DASHBOARD/ACTIVITY" [ref=e12] [cursor=pointer]:
+        - /url: /preview
+      - link "LIST YOUR PROPERTY" [ref=e14] [cursor=pointer]:
+        - /url: /more-detail
+      - button [ref=e17] [cursor=pointer]:
+        - img [ref=e18]
+  - main [ref=e21]:
+    - generic [ref=e161]:
+      - generic [ref=e163]:
+        - link "Back to listings" [ref=e164] [cursor=pointer]:
+          - /url: /
+          - img [ref=e165]
+          - text: Back to listings
+        - generic [ref=e167]:
+          - generic [ref=e168]: Rent
+          - generic [ref=e169]: Land/Plot
+        - heading "5+ BHK Land/Plot" [level=1] [ref=e170]
+        - generic [ref=e171]:
+          - img [ref=e172]
+          - paragraph [ref=e174]: Bhaupur, Bhauour, Bhaupur, auraiya
+        - paragraph [ref=e175]: Listed on 14 June 2026
+      - generic [ref=e176]:
+        - generic [ref=e178]:
+          - generic [ref=e179]:
+            - paragraph [ref=e180]: Monthly Rent
+            - paragraph [ref=e181]: Rs. 9,000/mo
+          - generic [ref=e183]:
+            - text: Security Deposit
+            - paragraph [ref=e184]: Rs. 5,000
+        - generic [ref=e185]:
+          - heading "Property Details" [level=2] [ref=e186]
+          - generic [ref=e187]:
+            - generic [ref=e188]:
+              - generic [ref=e189]: Listed For
+              - generic [ref=e190]: Rent
+            - generic [ref=e191]:
+              - generic [ref=e192]: Type
+              - generic [ref=e193]: Land/Plot
+            - generic [ref=e194]:
+              - generic [ref=e195]: Configuration
+              - generic [ref=e196]: 5+ BHK
+            - generic [ref=e197]:
+              - generic [ref=e198]: Property Age
+              - generic [ref=e199]: Greater than 10 Years
+        - generic [ref=e200]:
+          - heading "Location" [level=2] [ref=e201]
+          - generic [ref=e202]:
+            - generic [ref=e203]:
+              - generic [ref=e204]: Building
+              - generic [ref=e205]: Bhaupur
+            - generic [ref=e206]:
+              - generic [ref=e207]: Locality
+              - generic [ref=e208]: Bhauour
+            - generic [ref=e209]:
+              - generic [ref=e210]: Landmark
+              - generic [ref=e211]: Bhaupur
+            - generic [ref=e212]:
+              - generic [ref=e213]: City
+              - generic [ref=e214]: auraiya
+          - generic [ref=e216]:
+            - button "Marker" [ref=e217] [cursor=pointer]
+            - generic:
+              - generic [ref=e218]:
+                - button "Zoom in" [ref=e219] [cursor=pointer]: +
+                - button "Zoom out" [ref=e220] [cursor=pointer]: −
+              - generic [ref=e221]:
+                - link "Leaflet" [ref=e222] [cursor=pointer]:
+                  - /url: https://leafletjs.com
+                  - img [ref=e223]
+                  - text: Leaflet
+                - text: "| ©"
+                - link "OpenStreetMap" [ref=e227] [cursor=pointer]:
+                  - /url: https://www.openstreetmap.org/copyright
+                - text: contributors
+        - generic [ref=e228]:
+          - heading "Features & Amenities" [level=2] [ref=e229]
+          - generic [ref=e230]:
+            - generic [ref=e231]:
+              - generic [ref=e232]: 🐾
+              - generic [ref=e233]: Pets Allowed
+            - generic [ref=e234]:
+              - generic [ref=e235]: 🚗
+              - generic [ref=e236]: Reserved Parking
+            - generic [ref=e237]:
+              - generic [ref=e238]: 📹
+              - generic [ref=e239]: CCTV
+            - generic [ref=e240]:
+              - generic [ref=e241]: 💧
+              - generic [ref=e242]: "Water: Both"
+            - generic [ref=e243]:
+              - generic [ref=e244]: ⚡
+              - generic [ref=e245]: "Power: Rare/No Powercut"
+        - link "Back to all listings" [ref=e247] [cursor=pointer]:
+          - /url: /
+          - img [ref=e248]
+          - text: Back to all listings

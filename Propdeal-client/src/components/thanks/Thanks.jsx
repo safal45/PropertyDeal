@@ -12,32 +12,33 @@ function Thanks() {
       navigate("/preview");
     };
   return (
-    <div className="w-[51.813rem] font-Inter font-normal text-[#000000D9] h-[24.563rem] mt-[10.125rem] ml-[7.438rem] ">
-      <div className="h-1/2">
-        <h1 className="text-[24px]">
-          Thank you for listing your property with us,
+    <div className="min-h-screen bg-[#F5F7FA] flex items-center justify-center px-6">
+      <div className="bg-white rounded-[14px] border border-[#E5E7EB] shadow-sm p-10 max-w-xl w-full font-Inter font-normal text-[#000000D9]">
+        <h1 className="font-MerriweatherSans text-[24px] text-[#122B49]">
+          Thank you for listing your property with us
         </h1>
-        <p className="text-[18px] my-[2rem]">
-          {" "}
+        <p className="text-[16px] mt-6 text-[#4B5563] leading-relaxed">
           Your listing will be reviewed and will go live within 24 hours.
         </p>
-        <p className="text-[18px]">
-          {" "}
+        <p className="text-[16px] mt-3 text-[#4B5563] leading-relaxed">
           We will now manage your listing and get in touch with you after
           finding the best suitable tenant as per your preference.
         </p>
-      </div>
-      <div className="mt-[2.5rem] flex flex-col space-y-[1rem]">
-        <h1 className="font-JF font-normal text-[16px] text-[#122B49]">
-          -Dylan Estates
-        </h1>
-        <input className="h-[40px] pl-4 border-[1px] mt-2 outline-none font-Inter font-normal text-[#00000040] text-[14px] border-[#7A7A7A] rounded-[2px] w-[19.25rem]" />
-        <div className="flex flex-row  w-[28.375rem] text-[16px] font-Inter font-normal justify-between h-[43px]">
-          <button onClick={handleEdit} className="w-[12.938rem] bg-[#122B49] text-[#FFFFFF] rounded-[8px] text-center">
-            Edit Property Listing
+        <p className="font-Inter font-medium text-[15px] text-[#122B49] mt-8">
+          — PropertyDeal
+        </p>
+        <div className="flex flex-col sm:flex-row gap-3 mt-6">
+          <button
+            onClick={handleEdit}
+            className="flex-1 bg-[#122B49] text-white font-Inter text-[14px] font-medium py-3 rounded-[8px] hover:bg-[#0a1e34] transition-colors text-center"
+          >
+            Edit Listing
           </button>
-          <button onClick={handlePreview} className="w-[12.938rem] bg-[#122B49] text-[#FFFFFF] rounded-[8px] text-center">
-            Preview Property Listing
+          <button
+            onClick={handlePreview}
+            className="flex-1 bg-white border border-[#122B49] text-[#122B49] font-Inter text-[14px] font-medium py-3 rounded-[8px] hover:bg-[#F0F4F8] transition-colors text-center"
+          >
+            View All Listings
           </button>
         </div>
       </div>
