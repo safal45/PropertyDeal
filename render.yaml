@@ -1,0 +1,31 @@
+# Render Blueprint — PropertyDeal backend
+# Docs: https://render.com/docs/blueprint-spec
+#
+# Usage:
+#   Render dashboard → New → Blueprint → connect this repo
+#   Render reads this file and configures the web service automatically.
+#
+# After deploy, set these two env vars manually in the Render dashboard
+# (they are environment-specific and must not be committed):
+#   - DATABASE_URL : your PostgreSQL connection string (Supabase or Render Postgres)
+#   - CORS_ORIGINS : your Vercel frontend URL, e.g. https://propertydeal.vercel.app
+
+services:
+  - type: web
+    name: propertydeal-api
+    runtime: python
+    rootDir: flask_server
+    buildCommand: pip install -r requirements.txt
+    startCommand: flask db upgrade && gunicorn app:app --bind 0.0.0.0:$PORT --workers 2 --timeout 120
+    plan: starter
+    envVars:
+      - key: PYTHON_VERSION
+        value: "3.11.9"
+      - key: FLASK_DEBUG
+        value: "false"
+      - key: JWT_SECRET_KEY
+        generateValue: true     # Render auto-generates a secure random value
+      - key: DATABASE_URL
+        sync: false             # Set manually: your Supabase or Render Postgres URL
+      - key: CORS_ORIGINS
+        sync: false             # Set manually: your Vercel frontend URL
